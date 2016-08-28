@@ -1,0 +1,9 @@
+CREATE TRIGGER Incr_Plongee 
+BEFORE INSERT ON PLONGEE
+FOR EACH ROW
+
+BEGIN
+
+    SELECT Seq_Plongee.nextval into :NEW.IDPLON FROM dual;
+
+END;

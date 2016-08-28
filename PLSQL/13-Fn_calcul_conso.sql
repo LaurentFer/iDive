@@ -1,0 +1,19 @@
+CREATE OR REPLACE FUNCTION FN_Calcul_Conso(Participant VARCHAR2,IdentPlon NUMBER)
+  RETURN NUMBER IS
+
+  Conso     NUMBER;
+
+  CURSOR TEMPO IS
+    SELECT ((((PCB*PPD)-(PCB*PPA))/((PPRO/10)+1))/PDUR)
+    FROM    PLONGER
+    WHERE   PMAIL=Participant AND IDPLON=IdentPlon;
+  
+BEGIN
+
+  OPEN  TEMPO;
+  FETCH TEMPO INTO Conso;
+  CLOSE TEMPO;
+
+  RETURN Conso;
+  
+END;
